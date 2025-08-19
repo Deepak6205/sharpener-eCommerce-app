@@ -1,0 +1,10 @@
+.head-sec{
+    margin-top: 55px;
+    background-color: grey;
+    color: white;
+    font-size: 55px;
+    text-align: center;
+}
+.head-sec h1{
+    padding-bottom: 55px;
+}

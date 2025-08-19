@@ -1,0 +1,89 @@
+section h2 {
+  font-family: "Metal Mania";
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 30px;
+}
+
+.music-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.music-item {
+  margin: 30px;
+  width: 250px;
+  text-align: center;
+}
+
+.music-item h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.image-container {
+  height: 250px;
+  width: 250px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.prod-images {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.5s ease-in, filter 0.5s ease-in;
+  filter: brightness(100%);
+}
+
+.prod-images:hover {
+  transform: scale(1.1);
+  filter: brightness(90%);
+}
+
+.prod-details {
+  display: flex;
+  margin: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shop-item-button {
+  cursor: pointer;
+  padding: 8px 12px;
+  color: white;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 4px;
+  background: #56CCF2;
+  transition: background 0.3s ease;
+}
+
+.shop-item-button:hover {
+  background: #2d9cdb;
+}
+.cart-btn-bottom {
+  display: flex;
+  padding: 15px;
+  background-color: #100f0f;
+  border: none;
+  border-radius: 7px;
+  margin: auto;
+  cursor: pointer;
+  color: #fefefe;
+  font-weight: 700;
+  
+}
+.cart-btn-bottom:hover{
+    color: #2d9cdb;
+    transition: color 0.3s ease;
+}
