@@ -33,7 +33,7 @@
   margin-right: 60px;
 }
 
-.nav-item {
+.nav-item{
   font-size: 1.5rem;
 }
 
@@ -50,4 +50,15 @@
 .nav-link.active {
   font-weight: bold;
   border-bottom: 2px solid #ff9800;
+}
+.cart-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;   /* same size as nav items */
+  padding: 0;
+}
+
+.cart-btn:hover {
+  color: #ff9800;
 }

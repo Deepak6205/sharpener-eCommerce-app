@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/Cart.css";
 
-const Cart = () => {
+const Cart = ({onClose}) => {
   const [cartElm, setCartElm] = useState([
     {
       title: "Colors",
@@ -38,7 +38,7 @@ const Cart = () => {
   return (
     <section id="cart" className="container" style={{ display: "block" }}>
       <h2>CART</h2>
-      <button className="cancel">X</button>
+      <button className="cancel" onClick={onClose}>X</button>
       <div className="cart-row cart-header">
         <span className="cart-item cart-column">ITEM</span>
         <span className="cart-price cart-column">PRICE</span>
@@ -54,7 +54,7 @@ const Cart = () => {
               </span>
               <span className="cart-price cart-column">{item.price}</span>
               <span className="cart-quantity cart-column">
-                <input type="text" value={item.quantity} />
+                <input type="text" value={item.quantity}/>
                 <button onClick={()=>handleRemove(i)}>REMOVE</button>
               </span>
             </div>
