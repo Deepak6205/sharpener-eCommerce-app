@@ -1,10 +1,8 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
-  const location = useLocation();
-
   return (
     <div className="nav-container">
       <ul className="nav-list">
@@ -20,14 +18,10 @@ const Navbar = () => {
             <NavLink to="/store" className="nav-link">Store</NavLink>
           </li>
         </div>
-
-        {/* Right side (Cart only visible on store page) */}
-        <div className="nav-right">
-          {location.pathname === "/store" && (
+        <div className="nav-right">      
             <li className="nav-item">
               <NavLink to="/cart" className="nav-link">Cart 0</NavLink>
             </li>
-          )}
         </div>
       </ul>
     </div>
