@@ -26,6 +26,11 @@ const Navbar = ({onCartClick}) => {
               Store
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink to="/movie" className="nav-link">
+              Movie
+            </NavLink>
+          </li>
         </div>
         <div className="nav-right">
           {location.pathname === "/store" && (
@@ -36,6 +41,7 @@ const Navbar = ({onCartClick}) => {
             </li>
           )}
         </div>
+        
       </ul>
     </div>
   );
