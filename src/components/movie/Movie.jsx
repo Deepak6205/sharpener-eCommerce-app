@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
+import "../../styles/Movie.css";
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [retry, setRetry] = useState(true); 
 
-  const fetchMovies = async () => {
+
+  const fetchMovies = useCallback(async () => {
     try {
       setError("");
+      setLoading(true);
       const response = await fetch("https://swapi.dev/api/films");
       if (!response.ok) throw new Error("Failed to fetch");
       const data = await response.json();
@@ -16,48 +18,41 @@ const Movie = () => {
       setLoading(false);
     } catch (err) {
       console.error("Error fetching movies:", err);
-      setError("Something went wrong... Retrying");
+      setError("Something went wrong, please try again.");
       setLoading(false);
     }
-  };
+  }, []);
 
-  useEffect(() => {
-    let timer;
-    if (retry) {
-      fetchMovies();
-      timer = setInterval(() => {
-        fetchMovies();
-      }, 5000);
-    }
-    return () => clearInterval(timer);
-  }, [retry]);
+  
+  const movieList = useMemo(
+    () =>
+      movies.map((movie) => (
+        <li className="movie-item" key={movie.episode_id}>
+          <h3>{movie.title}</h3>
+          <p>Release Date: {movie.release_date}</p>
+        </li>
+      )),
+    [movies]
+  );
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Star Wars Movies</h1>
+    <div className="movie-container">
+      
+      <button className="fetch-btn" onClick={fetchMovies}>
+        Fetch Movies
+      </button>
 
-      {loading && <p>Loading...</p>}
-
-      {!loading && error && (
-        <div>
-          <h2>{error}</h2>
-          <button onClick={() => setRetry(false)}>Cancel Retry</button>
-        </div>
-      )}
-
-      {!loading && !error && movies.length === 0 && (
-        <h2>Sorry this api is expired</h2>
-      )}
-
-      {!loading && !error && movies.length > 0 && (
-        <ul>
-          {movies.map((movie) => (
-            <li key={movie.episode_id}>
-              {movie.title} ({movie.release_date})
-            </li>
-          ))}
-        </ul>
-      )}
+      
+      <div className="movie-content">
+        {loading && <p className="loading">Loading...</p>}
+        {!loading && error && <p className="error">{error}</p>}
+        {!loading && !error && movies.length === 0 && (
+          <p className="no-data">No movies yet. Click the button above!</p>
+        )}
+        {!loading && !error && movies.length > 0 && (
+          <ul className="movie-list">{movieList}</ul>
+        )}
+      </div>
     </div>
   );
 };
