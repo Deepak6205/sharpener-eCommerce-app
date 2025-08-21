@@ -3,7 +3,7 @@
   position: fixed;
   top: 60px; /* adjust according to your navbar height */
   right: 0;
-  width: 350px;
+  width: 450px;
   height: calc(100vh - 60px);
   background: #fff;
   border-left: 2px solid #ddd;

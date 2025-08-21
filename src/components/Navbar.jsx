@@ -1,9 +1,11 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
+import { useProduct } from "./context/Context";
 
 const Navbar = ({onCartClick}) => {
   const location = useLocation();
+  const {cartElm} = useProduct();
   return (
     <div className="nav-container">
       <ul className="nav-list">
@@ -29,7 +31,7 @@ const Navbar = ({onCartClick}) => {
           {location.pathname === "/store" && (
             <li className="nav-item">
               <button className="nav-link cart-btn" onClick={onCartClick}>
-                Cart
+                Cart-{cartElm.length}
               </button>
             </li>
           )}

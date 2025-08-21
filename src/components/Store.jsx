@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../styles/Store.css";
+import { useProduct } from "./context/Context";
 
 const Store = () => {
   const [product] = useState([
@@ -30,7 +31,7 @@ const Store = () => {
         "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
     },
   ]);
-
+  const {handleAddProduct} = useProduct();
   return (
     <div>
       <Header />
@@ -53,7 +54,7 @@ const Store = () => {
 
                 <div className="prod-details">
                   <span>${item.price}</span>
-                  <button className="shop-item-button" type="button">
+                  <button className="shop-item-button" type="button" onClick={()=>handleAddProduct(item)}>
                     ADD TO CART
                   </button>
                 </div>
