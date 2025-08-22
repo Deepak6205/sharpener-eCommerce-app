@@ -22,6 +22,11 @@ const Navbar = ({onCartClick}) => {
             </NavLink>
           </li>
           <li className="nav-item">
+            <NavLink to="/contact" className="nav-link">
+              Contact
+            </NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink to="/store" className="nav-link">
               Store
             </NavLink>

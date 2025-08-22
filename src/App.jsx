@@ -7,6 +7,7 @@ import Store from "./components/Store";
 import Cart from "./components/Cart";
 import { ProductProvider } from "./components/context/Context";
 import FetchMovie from "./components/movie/Movie";
+import Contact from "./components/Contact";
 
 const App = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -27,6 +28,15 @@ const App = () => {
         <div>
           <Navbar onCartClick={() => setIsCartOpen(true)} />
           <About />
+        </div>
+      ),
+    },
+    {
+      path: "contact",
+      element: (
+        <div>
+          <Navbar onCartClick={() => setIsCartOpen(true)} />
+          <Contact />
         </div>
       ),
     },
