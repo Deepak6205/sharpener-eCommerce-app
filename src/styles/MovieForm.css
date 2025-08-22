@@ -1,0 +1,64 @@
+.form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f9f9ff; /* light background */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.form-control {
+  margin-bottom: 1rem;   /* gap between fields */
+  text-align: left;      /* align label + input to left */
+}
+
+label {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.3rem; /* gap between label and input */
+  font-weight: 600;
+  color: #4f46e5;        /* purple */
+  font-size: 16px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+input {
+  width: 95%;            /* not full width, gives some margin */
+  padding: 0.5rem;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+textarea {
+  width: 95%;            /* not full width, gives some margin */
+  padding: 0.5rem;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+input:focus {
+  border-color: #3b82f6; /* blue focus */
+  outline: none;
+}
+
+.add-btn {
+  display: inline-block; 
+  padding: 0.8rem 1.2rem;   /* smaller button */
+  border: none;
+  border-radius: 10px;
+  background-color: #4f46e5; /* purple */
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 0.5rem;     /* gap from last input */
+  
+}
+
+.add-btn:hover {
+  background-color: #3b82f6; /* blue on hover */
+}

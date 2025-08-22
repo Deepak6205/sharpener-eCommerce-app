@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo } from "react";
 import "../../styles/Movie.css";
+import MovieForm from "./MovieForm";
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
@@ -37,7 +38,7 @@ const Movie = () => {
 
   return (
     <div className="movie-container">
-      
+      <MovieForm/>
       <button className="fetch-btn" onClick={fetchMovies}>
         Fetch Movies
       </button>
