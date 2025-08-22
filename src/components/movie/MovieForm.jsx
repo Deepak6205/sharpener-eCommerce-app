@@ -1,41 +1,53 @@
 import React, { useState } from "react";
 import "../../styles/MovieForm.css";
-const MovieForm = () => {
-    const [title,setTitle] = useState("");
-    const [text,setText] = useState("");
-    const [date,setDate] = useState("");
-    
-    const titleChangeHandler = (e) =>{
-        setTitle(e.target.value);
-    }
 
-    const textChangeHandler = (e) =>{
-        setText(e.target.value);
-    }
+const MovieForm = ({ onAddMovie }) => {
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [date, setDate] = useState("");
 
-    const dateChangeHandler = (e) =>{
-        setDate(e.target.value);
-    }
- const submitHandler = (e)=>{
+  const submitHandler = (e) => {
     e.preventDefault();
-    console.log([title,text,date]);
+    const movie = {
+      title: title,
+      opening_crawl: text,
+      release_date: date,
+    };
+    onAddMovie(movie);
     setTitle("");
     setText("");
     setDate("");
- }
+  };
+
   return (
     <form onSubmit={submitHandler} className="form-container">
       <div>
         <label htmlFor="title">Title</label>
-        <input type="text" id="title" value={title}  onChange={titleChangeHandler}/>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
       </div>
       <div>
         <label htmlFor="open-text">Opening Text</label>
-        <textarea cols={43} rows={5} type="text" id="open-text" onChange={textChangeHandler} value={text} />
+        <textarea
+          cols={43}
+          rows={5}
+          id="open-text"
+          onChange={(e) => setText(e.target.value)}
+          value={text}
+        />
       </div>
       <div>
-        <label htmlFor="r-date" >Title</label>
-        <input type="date" id="r-date" onChange={dateChangeHandler} value={date}/>
+        <label htmlFor="r-date">Release Date</label>
+        <input
+          type="date"
+          id="r-date"
+          onChange={(e) => setDate(e.target.value)}
+          value={date}
+        />
       </div>
       <button className="add-btn">Add Movie</button>
     </form>
