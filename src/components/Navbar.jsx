@@ -13,7 +13,7 @@ const Navbar = ({ onCartClick }) => {
   const handleLogout = async () => {
     try {
       await logout(); 
-      navigate("/login");
+      navigate("/login"); 
     } catch (error) {
       console.error("Logout failed:", error.message);
     }
@@ -28,29 +28,19 @@ const Navbar = ({ onCartClick }) => {
       <ul className="nav-list">
         <div className="nav-center">
           <li className="nav-item">
-            <NavLink to="/" className="nav-link">
-              Home
-            </NavLink>
+            <NavLink to="/" className="nav-link">Home</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/about" className="nav-link">
-              About
-            </NavLink>
+            <NavLink to="/about" className="nav-link">About</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/contact" className="nav-link">
-              Contact
-            </NavLink>
+            <NavLink to="/contact" className="nav-link">Contact</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/store" className="nav-link">
-              Store
-            </NavLink>
+            <NavLink to="/store" className="nav-link">Store</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/movie" className="nav-link">
-              Movie
-            </NavLink>
+            <NavLink to="/movie" className="nav-link">Movie</NavLink>
           </li>
         </div>
 
@@ -64,9 +54,9 @@ const Navbar = ({ onCartClick }) => {
             </li>
           )}
 
-          {/* Change Password button */}
+          
           <li className="nav-item">
-            <button className="nav-link change-password-btn" onClick={handleChangePassword} >
+            <button className="nav-link change-password-btn" onClick={handleChangePassword}>
               Change Password
             </button>
           </li>

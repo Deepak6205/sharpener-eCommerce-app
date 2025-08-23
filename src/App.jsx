@@ -20,7 +20,11 @@ import ChangePassword from "./components/authentication/ChangePassword";
 
 const AppRoutes = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, loading } = useAuth(); // Added loading
+
+  if (loading) {
+    return <div>Loading...</div>; // Wait for auth initialization
+  }
 
   const PrivateRoute = ({ element }) => {
     return user ? element : <Navigate to="/login" />;
@@ -105,7 +109,6 @@ const AppRoutes = () => {
         />
       ),
     },
-
     {
       path: "movie",
       element: (
