@@ -8,7 +8,7 @@ import Cart from "./components/Cart";
 import { ProductProvider } from "./components/context/Context";
 import FetchMovie from "./components/movie/Movie";
 import Contact from "./components/Contact";
-
+import ProductDetails from "./components/ProductDetails";
 const App = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -51,6 +51,16 @@ const App = () => {
       ),
     },
     {
+      path: "store/:id",
+      element: (
+        <div>
+          <Navbar onCartClick={() => setIsCartOpen(true)} />
+          <ProductDetails onCartClick={() => setIsCartOpen(true)} />
+          {isCartOpen && <Cart onClose={() => setIsCartOpen(false)} />}
+        </div>
+      ),
+    },
+    {
       path: "movie",
       element: (
         <div>
@@ -65,11 +75,7 @@ const App = () => {
     <ProductProvider>
       <RouterProvider router={router} />
     </ProductProvider>
-    // <div>
-    //   <RouterProvider router={router} />
-    // </div>
   );
 };
 
 export default App;
-

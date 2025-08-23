@@ -3,9 +3,9 @@ import { NavLink, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
 import { useProduct } from "./context/Context";
 
-const Navbar = ({onCartClick}) => {
+const Navbar = ({ onCartClick }) => {
   const location = useLocation();
-  const {cartElm} = useProduct();
+  const { cartElm } = useProduct();
   return (
     <div className="nav-container">
       <ul className="nav-list">
@@ -38,7 +38,8 @@ const Navbar = ({onCartClick}) => {
           </li>
         </div>
         <div className="nav-right">
-          {location.pathname === "/store" && (
+          {(location.pathname.startsWith("/store") ||
+            location.pathname.startsWith("/product")) && (
             <li className="nav-item">
               <button className="nav-link cart-btn" onClick={onCartClick}>
                 Cart-{cartElm.length}
@@ -46,7 +47,6 @@ const Navbar = ({onCartClick}) => {
             </li>
           )}
         </div>
-        
       </ul>
     </div>
   );
