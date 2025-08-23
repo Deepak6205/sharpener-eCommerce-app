@@ -2,19 +2,16 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBtger6DxiV71tddLtSXYEANaSteTRfXaE",
-
-  authDomain: "http-request-movie.firebaseapp.com",
-
-  databaseURL: "https://http-request-movie-default-rtdb.firebaseio.com",
-
-  projectId: "http-request-movie",
-
-  storageBucket: "http-request-movie.firebasestorage.app",
-
-  messagingSenderId: "312595200770",
-
-  appId: "1:312595200770:web:4beb49c7ead1753d3fe01b",
+  
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+  
+  
 };
 
 const app = initializeApp(firebaseConfig);
