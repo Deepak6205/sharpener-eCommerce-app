@@ -1,21 +1,17 @@
 import React from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
-import { auth } from "./authentication/firebase";
-import { signOut } from "firebase/auth";
 import { useProduct } from "./context/Context";
-
-
+import { useAuth } from "./context/AuthContext"; 
 
 const Navbar = ({ onCartClick }) => {
   const location = useLocation();
-  const navigate = useNavigate();
   const { cartElm } = useProduct();
+  const { logout } = useAuth(); 
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
-      navigate("/login"); // redirect after logout
+      await logout(); 
     } catch (error) {
       console.error("Logout failed:", error.message);
     }
@@ -24,7 +20,6 @@ const Navbar = ({ onCartClick }) => {
   return (
     <div className="nav-container">
       <ul className="nav-list">
-        {/* Center links */}
         <div className="nav-center">
           <li className="nav-item">
             <NavLink to="/" className="nav-link">
@@ -53,7 +48,6 @@ const Navbar = ({ onCartClick }) => {
           </li>
         </div>
 
-        {/* Right side */}
         <div className="nav-right">
           {(location.pathname.startsWith("/store") ||
             location.pathname.startsWith("/product")) && (
@@ -64,7 +58,6 @@ const Navbar = ({ onCartClick }) => {
             </li>
           )}
 
-          {/* Logout button */}
           <li className="nav-item">
             <button className="nav-link logout-btn" onClick={handleLogout}>
               Logout

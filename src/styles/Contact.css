@@ -1,5 +1,5 @@
 .contact-container {
-  margin-top: 80px; /* ensures content is below navbar */
+  margin-top: 80px; 
   display: flex;
   flex-direction: column;
   align-items: center;

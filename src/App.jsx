@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
@@ -10,20 +10,12 @@ import FetchMovie from "./components/movie/Movie";
 import Contact from "./components/Contact";
 import ProductDetails from "./components/ProductDetails";
 import Login from "./components/authentication/Login";
-import Signup from "./components/authentication/Signup"; // ✅ added
-import { auth } from "./components/authentication/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import Signup from "./components/authentication/Signup";
+import { AuthProvider, useAuth } from "./components/context/AuthContext"; // ✅ import Auth context
 
-const App = () => {
+const AppRoutes = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
+  const { user } = useAuth(); // ✅ get user from context
 
   const PrivateRoute = ({ element }) => {
     return user ? element : <Navigate to="/login" />;
@@ -108,20 +100,20 @@ const App = () => {
         />
       ),
     },
-    {
-      path: "login",
-      element: <Login />, // ✅ public
-    },
-    {
-      path: "signup",
-      element: <Signup />, // ✅ public
-    },
+    { path: "login", element: <Login /> },
+    { path: "signup", element: <Signup /> },
   ]);
 
+  return <RouterProvider router={router} />;
+};
+
+const App = () => {
   return (
-    <ProductProvider>
-      <RouterProvider router={router} />
-    </ProductProvider>
+    <AuthProvider> {/* ✅ Wrap the whole app with AuthProvider */}
+      <ProductProvider>
+        <AppRoutes />
+      </ProductProvider>
+    </AuthProvider>
   );
 };
 

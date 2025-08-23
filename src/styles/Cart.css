@@ -1,7 +1,7 @@
-/* Cart container */
+
 #cart.container {
   position: fixed;
-  top: 60px; /* adjust according to your navbar height */
+  top: 60px; 
   right: 0;
   width: 450px;
   height: calc(100vh - 60px);
@@ -11,15 +11,15 @@
   padding: 15px;
   overflow-y: auto;
   z-index: 1000;
-  display: none; /* by default hidden */
+  display: none; 
 }
 
-/* Show cart when active */
+
 #cart.container.active {
   display: block;
 }
 
-/* Heading */
+
 #cart h2 {
   margin: 0;
   padding: 10px 0;
@@ -29,7 +29,7 @@
   font-weight: bold;
 }
 
-/* Cancel button (X) */
+
 #cart .cancel {
   position: absolute;
   top: 10px;
@@ -43,7 +43,7 @@
   border-radius: 5px;
 }
 
-/* Cart header row */
+
 .cart-header {
   font-weight: bold;
   border-bottom: 1px solid #ddd;
@@ -52,7 +52,7 @@
   justify-content: space-between;
 }
 
-/* Cart rows */
+
 .cart-row {
   display: flex;
   justify-content: space-between;
@@ -61,14 +61,13 @@
   border-bottom: 1px solid #eee;
 }
 
-/* Item with image */
+
 .cart-item {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Product Image */
 .cart-img {
   width: 50px;
   height: 50px;
@@ -77,13 +76,13 @@
   border-radius: 6px;
 }
 
-/* Price column */
+
 .cart-price {
   font-size: 16px;
   font-weight: 500;
 }
 
-/* Quantity input and button */
+
 .cart-quantity {
   display: flex;
   align-items: center;
@@ -107,7 +106,7 @@
   border-radius: 4px;
 }
 
-/* Total */
+
 .cart-total {
   margin-top: 15px;
   text-align: right;
@@ -117,7 +116,7 @@
   border-top: 2px solid #ddd;
 }
 
-/* Purchase button */
+
 .purchase-btn {
   margin-top: 15px;
   width: 100%;

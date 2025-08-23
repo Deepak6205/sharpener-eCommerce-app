@@ -14,7 +14,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/"); // redirect to home after signup
+      navigate("/"); 
     } catch (err) {
       setError(err.message);
     }
