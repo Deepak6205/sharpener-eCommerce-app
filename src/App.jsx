@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
@@ -11,11 +15,12 @@ import Contact from "./components/Contact";
 import ProductDetails from "./components/ProductDetails";
 import Login from "./components/authentication/Login";
 import Signup from "./components/authentication/Signup";
-import { AuthProvider, useAuth } from "./components/context/AuthContext"; // ✅ import Auth context
+import { AuthProvider, useAuth } from "./components/context/AuthContext";
+import ChangePassword from "./components/authentication/ChangePassword";
 
 const AppRoutes = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { user } = useAuth(); // ✅ get user from context
+  const { user } = useAuth();
 
   const PrivateRoute = ({ element }) => {
     return user ? element : <Navigate to="/login" />;
@@ -88,6 +93,20 @@ const AppRoutes = () => {
       ),
     },
     {
+      path: "change-password",
+      element: (
+        <PrivateRoute
+          element={
+            <div>
+              <Navbar onCartClick={() => setIsCartOpen(true)} />
+              <ChangePassword />
+            </div>
+          }
+        />
+      ),
+    },
+
+    {
       path: "movie",
       element: (
         <PrivateRoute
@@ -109,7 +128,7 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <AuthProvider> {/* ✅ Wrap the whole app with AuthProvider */}
+    <AuthProvider>
       <ProductProvider>
         <AppRoutes />
       </ProductProvider>

@@ -77,3 +77,17 @@
 .logout-btn:hover {
   background: darkred;
 }
+.nav-right .change-password-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1890ff; 
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.nav-right .change-password-btn:hover {
+  background-color: #0272ce;
+}
