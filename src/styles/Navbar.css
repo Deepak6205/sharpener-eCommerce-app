@@ -91,3 +91,67 @@
 .nav-right .change-password-btn:hover {
   background-color: #0272ce;
 }
+.menu-btn {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+
+@media (max-width: 768px) {
+  .nav-list {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: -250px; 
+    height: 100%;
+    width: 250px;
+    background-color: #222;
+    padding-top: 3rem;
+    gap: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .nav-list.open {
+    left: 0; 
+  }
+
+  .nav-center,
+  .nav-right {
+    flex-direction: column;
+    gap: 20px;
+    margin: 0;
+  }
+
+  .nav-right .cart-btn,
+  .logout-btn,
+  .change-password-btn {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+}
