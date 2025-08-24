@@ -4,6 +4,7 @@ import { useProduct } from "./context/Context";
 const Cart = ({ onClose }) => {
   const { cartElm, handleRemove } = useProduct();
   const total = cartElm.reduce((acc, item) => acc + item.price, 0);
+
   return (
     <section id="cart" className="container" style={{ display: "block" }}>
       <h2>CART</h2>
@@ -16,25 +17,28 @@ const Cart = ({ onClose }) => {
         <span className="cart-quantity cart-column">QUANTITY</span>
       </div>
       <div className="cart-items">
-        {cartElm.map((item, i) => {
-          return (
-            <div className="cart-row" id="in-cart-album" key={i}>
-              <span className="cart-item cart-column">
-                <img
-                  className="cart-img"
-                  src={item.image || item.imageUrl}
-                  alt={item.title}
-                />
-                <span>{item.title.slice(0, 10) + ".."}</span>
-              </span>
-              <span className="cart-price cart-column">${item.price}</span>
-              <span className="cart-quantity cart-column">
-                <input type="text" value="1" readOnly />
-                <button onClick={() => handleRemove(i)}>REMOVE</button>
-              </span>
-            </div>
-          );
-        })}
+        {cartElm.map((item) => (
+          <div
+            className="cart-row"
+            id="in-cart-album"
+            key={item._id || item.title}
+          >
+            <span className="cart-item cart-column">
+              <img
+                className="cart-img"
+                src={item.image || item.imageUrl}
+                alt={item.title}
+              />
+              <span>{item.title.slice(0, 10) + ".."}</span>
+            </span>
+            <span className="cart-price cart-column">${item.price}</span>
+            <span className="cart-quantity cart-column">
+              <input type="text" value="1" readOnly />
+              {/* ✅ pass _id */}
+              <button onClick={() => handleRemove(item._id)}>REMOVE</button>
+            </span>
+          </div>
+        ))}
       </div>
       <div className="cart-total">
         <span>
