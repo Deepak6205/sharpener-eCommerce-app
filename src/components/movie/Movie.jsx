@@ -7,9 +7,9 @@ const Movie = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [user, setUser] = useState(null); // store logged-in user
+  const [user, setUser] = useState(null); 
 
-  // Listen for auth state changes
+  
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -28,13 +28,13 @@ const Movie = () => {
   // Helper to get token
   const getToken = async () => {
     if (!user) throw new Error("No user logged in yet");
-    return await user.getIdToken(true); // true = refresh if expired
+    return await user.getIdToken(true); 
   };
 
   // Fetch movies
   const fetchMovies = useCallback(async () => {
     try {
-      if (!user) return; // wait until user is logged in
+      if (!user) return; 
 
       setError("");
       setLoading(true);
@@ -70,7 +70,7 @@ const Movie = () => {
     fetchMovies();
   }, [fetchMovies]);
 
-  // Add movie
+  
   async function addMovieHandler(movie) {
     try {
       const token = await getToken();
@@ -93,7 +93,7 @@ const Movie = () => {
     }
   }
 
-  // Delete movie
+  
   async function deleteMovieHandler(id) {
     try {
       const token = await getToken();
@@ -111,7 +111,7 @@ const Movie = () => {
     }
   }
 
-  // Render movie list
+ 
   const movieList = useMemo(
     () =>
       movies.map((movie) => (
