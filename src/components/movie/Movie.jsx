@@ -1,23 +1,53 @@
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import "../../styles/Movie.css";
 import MovieForm from "./MovieForm";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [user, setUser] = useState(null); // store logged-in user
 
+  // Listen for auth state changes
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("User logged in:", user.email);
+        setUser(user);
+      } else {
+        console.log("No user logged in");
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Helper to get token
+  const getToken = async () => {
+    if (!user) throw new Error("No user logged in yet");
+    return await user.getIdToken(true); // true = refresh if expired
+  };
+
+  // Fetch movies
   const fetchMovies = useCallback(async () => {
     try {
+      if (!user) return; // wait until user is logged in
+
       setError("");
       setLoading(true);
+
+      const token = await getToken();
+
       const response = await fetch(
-        "https://http-request-movie-default-rtdb.firebaseio.com/movies.json"
+        `https://http-request-movie-default-rtdb.firebaseio.com/movies.json?auth=${token}`
       );
+
       if (!response.ok) throw new Error("Failed to fetch");
       const data = await response.json();
 
-      
       const loadedMovies = [];
       for (const key in data) {
         loadedMovies.push({
@@ -34,17 +64,19 @@ const Movie = () => {
       setError("Something went wrong, please try again.");
       setLoading(false);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     fetchMovies();
   }, [fetchMovies]);
 
-
+  // Add movie
   async function addMovieHandler(movie) {
     try {
+      const token = await getToken();
+
       const response = await fetch(
-        "https://http-request-movie-default-rtdb.firebaseio.com/movies.json",
+        `https://http-request-movie-default-rtdb.firebaseio.com/movies.json?auth=${token}`,
         {
           method: "POST",
           body: JSON.stringify(movie),
@@ -53,28 +85,33 @@ const Movie = () => {
           },
         }
       );
+
       if (!response.ok) throw new Error("Failed to add movie");
-      fetchMovies(); 
+      fetchMovies();
     } catch (err) {
       console.error("Error adding movie:", err);
     }
   }
 
-  
+  // Delete movie
   async function deleteMovieHandler(id) {
     try {
+      const token = await getToken();
+
       await fetch(
-        `https://http-request-movie-default-rtdb.firebaseio.com/movies/${id}.json`,
+        `https://http-request-movie-default-rtdb.firebaseio.com/movies/${id}.json?auth=${token}`,
         {
           method: "DELETE",
         }
       );
-      setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== id)); // update UI
+
+      setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== id));
     } catch (err) {
       console.error("Error deleting movie:", err);
     }
   }
 
+  // Render movie list
   const movieList = useMemo(
     () =>
       movies.map((movie) => (
@@ -97,21 +134,27 @@ const Movie = () => {
 
   return (
     <div className="movie-container">
-      <MovieForm onAddMovie={addMovieHandler} />
-      <button className="fetch-btn" onClick={fetchMovies}>
-        Fetch Movies
-      </button>
+      {!user && <p className="error">Please log in to manage movies.</p>}
 
-      <div className="movie-content">
-        {loading && <p className="loading">Loading...</p>}
-        {!loading && error && <p className="error">{error}</p>}
-        {!loading && !error && movies.length === 0 && (
-          <p className="no-data">No movies yet. Click the button above!</p>
-        )}
-        {!loading && !error && movies.length > 0 && (
-          <ul className="movie-list">{movieList}</ul>
-        )}
-      </div>
+      {user && (
+        <>
+          <MovieForm onAddMovie={addMovieHandler} />
+          <button className="fetch-btn" onClick={fetchMovies}>
+            Fetch Movies
+          </button>
+
+          <div className="movie-content">
+            {loading && <p className="loading">Loading...</p>}
+            {!loading && error && <p className="error">{error}</p>}
+            {!loading && !error && movies.length === 0 && (
+              <p className="no-data">No movies yet. Click the button above!</p>
+            )}
+            {!loading && !error && movies.length > 0 && (
+              <ul className="movie-list">{movieList}</ul>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
