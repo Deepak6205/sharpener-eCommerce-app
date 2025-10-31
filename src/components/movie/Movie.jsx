@@ -14,10 +14,8 @@ const Movie = () => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("User logged in:", user.email);
         setUser(user);
       } else {
-        console.log("No user logged in");
         setUser(null);
       }
     });
@@ -25,13 +23,13 @@ const Movie = () => {
     return () => unsubscribe();
   }, []);
 
-  // Helper to get token
+ 
   const getToken = async () => {
     if (!user) throw new Error("No user logged in yet");
     return await user.getIdToken(true); 
   };
 
-  // Fetch movies
+
   const fetchMovies = useCallback(async () => {
     try {
       if (!user) return; 

@@ -8,7 +8,7 @@ const Footer = () => {
         <ul>
           <li>
             <a href="https://www.youtube.com">
-              <img
+              <img style={{width: "39px", height:"38px"}}
                 src="https://i.pinimg.com/736x/7d/dc/54/7ddc545046b212d9ecc8eef83569222b.jpg"
                 alt=""
               />

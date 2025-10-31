@@ -20,10 +20,10 @@ import ChangePassword from "./components/authentication/ChangePassword";
 
 const AppRoutes = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { user, loading } = useAuth(); // Added loading
+  const { user, loading } = useAuth(); 
 
   if (loading) {
-    return <div>Loading...</div>; // Wait for auth initialization
+    return <div>Loading...</div>;
   }
 
   const PrivateRoute = ({ element }) => {

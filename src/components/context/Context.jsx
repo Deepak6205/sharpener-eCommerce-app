@@ -10,7 +10,6 @@ export const ProductProvider = ({ children }) => {
   const API_BASE =
     "https://crudcrud.com/api/5058c0e09627445a87a3b27e617da00a/cart";
 
-  // ✅ Fetch cart on mount or when user changes
   useEffect(() => {
     const fetchCart = async () => {
       if (!user?.email) return;
@@ -28,7 +27,6 @@ export const ProductProvider = ({ children }) => {
     fetchCart();
   }, [user]);
 
-  // ✅ Add product
   const handleAddProduct = async (product) => {
     if (!user?.email) return;
 
@@ -40,14 +38,14 @@ export const ProductProvider = ({ children }) => {
         body: JSON.stringify(productWithUser),
       });
 
-      const savedProduct = await res.json(); // get product with _id
+      const savedProduct = await res.json(); 
       setCartElm((prev) => [...prev, savedProduct]);
     } catch (err) {
       console.error("Error adding product to backend:", err);
     }
   };
 
-  // ✅ Remove product using _id
+ 
   const handleRemove = async (_id) => {
     if (!user?.email || !_id) return;
 
@@ -56,7 +54,7 @@ export const ProductProvider = ({ children }) => {
         method: "DELETE",
       });
 
-      // update frontend immediately
+     
       const updatedCart = cartElm.filter((item) => item._id !== _id);
       setCartElm(updatedCart);
     } catch (err) {

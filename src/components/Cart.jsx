@@ -34,7 +34,6 @@ const Cart = ({ onClose }) => {
             <span className="cart-price cart-column">${item.price}</span>
             <span className="cart-quantity cart-column">
               <input type="text" value="1" readOnly />
-              {/* ✅ pass _id */}
               <button onClick={() => handleRemove(item._id)}>REMOVE</button>
             </span>
           </div>
